@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from fkip.views import index
-from faperta.views import indexfaperta
+from faperta.views import *
 from feb.views import indexfeb
 from fh.views import indexfh
 from fisip.views import indexfisip
@@ -15,6 +15,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('fkip/', index),
     path('faperta/', indexfaperta),
+    path('tambah-dosen/', tambah_Dosen, name='tambah_Dosen'),
     path('feb/', indexfeb),
     path('fh/', indexfh),
     path('fisip/', indexfisip),
@@ -23,4 +24,8 @@ urlpatterns = [
     path('fk/', indexfk),
     path('profil/', indexprofil),
     path('about/', indexabout),
+    path('tambah-tendik/', tambah_Tendik),
+    path('tambah-mahasiswa/', tambah_Mahasiswa),
+    path('Dosen/ubah/<int:id_Dosen>', ubah_Dosen, name='ubah_Dosen'),
+    path('Dosen/hapus/<int:id_Dosen>', hapus_Dosen, name='hapus_Dosen'),
 ]

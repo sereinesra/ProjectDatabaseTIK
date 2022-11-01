@@ -4,7 +4,7 @@ from django.db import models
 class Dosen(models.Model):
     NIP = models.CharField(max_length=200)
     Nama = models.CharField(max_length=200)
-    TanggalLahir = models.CharField(max_length=50)
+    TanggalLahir = models.CharField(max_length=200)
     Foto = models.CharField(max_length=200)
     Email = models.CharField(max_length=200)
     Fakultas = models.CharField(max_length=200)
@@ -17,7 +17,7 @@ def __str__(self):
 class Tendik(models.Model):
     NIP = models.CharField(max_length=200)
     Nama = models.CharField(max_length=200)
-    TanggalLahir = models.CharField(max_length=50)
+    TanggalLahir = models.CharField(max_length=200)
     Foto = models.CharField(max_length=200)
     Email = models.CharField(max_length=200)
     Unit = models.CharField(max_length=200)
@@ -29,11 +29,11 @@ def __str__(self):
 class Mahasiswa(models.Model):
     NIM = models.CharField(max_length=200)
     Nama = models.CharField(max_length=200)
-    TanggalLahir = models.CharField(max_length=50)
+    TanggalLahir = models.CharField(max_length=200)
     Foto = models.CharField(max_length=200)
     Email = models.CharField(max_length=200)
     Fakultas = models.CharField(max_length=200)
     Prodi = models.CharField(max_length=200)
 
-def __str__(self):
-    return self.Nama
+def __str__ (self):
+    return self.NIM

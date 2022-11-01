@@ -1,28 +1,112 @@
 from django.shortcuts import render
-
+from faperta.forms import FormDosen, FormTendik, FormMahasiswa
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from faperta.models import Dosen, Tendik, Mahasiswa
 # Create your views here.
-def indexfaperta(request):
-    tentang = "Jurusan/Program Studi yang ada di Fakultas Pertanian"
-    prodi1 = "Agribisnis"
-    penjelasan1  = "Pada Tahun 2009 Program Studi Sosial Ekonomi Pertanian berubah menjadi Jurusan/Program Studi Agribisnis, dengan Keputusan Rektor No. 181/H43/KR/SK/2009 dan diakreditasi kembali pada tahun 2012 dengan akreditasi B berdasarkan SK BAN PT Nomor: 024/BAN-PT/Ak-XV/S1/VIII/2012."
-    prodi2 = "Agroekoteknologi"
-    penjelasan2 = "Jurusan agroekoteknologi merupakan suatu upaya turut sertanya Faperta Untirta dalam menunjang pembangunan nasional dan daerah terutama dalam pengembangan pemanfaatan dan pengelolaan sumberdaya alam (SDA) dan sumberdaya Manusia (SDM) khususnya di sektor pertanian."
-    prodi3 = "Ilmu Perikanan"
-    penjelasan3 = "Prodi Perikanan merupakan suatu upaya turut sertanya Faperta Untirta dalam menunjang pembangunan nasional dan daerah terutama pengembangan sumberdaya manusia (SDM) di sektor perikanan."
-    prodi4 = "Teknologi Pangan"
-    penjelasan4 = "Program pengembangan di Program studi Teknologi Pangan adalah melaksanakan tridharma perguruan tinggi dan menyelenggarakan program studi yang berkualitas dalam pengembangan IPTEK pangan berbasis sumber daya lokal untuk mendukung Food Security."
-    
-    konteks = {
-        'tentang' : tentang,
-        'penjelasan1' : penjelasan1,
-        'jurusan1' : prodi1,
-        'jurusan2' : prodi2,
-        'penjelasan2' : penjelasan2,
-        'jurusan3' : prodi3,
-        'penjelasan3' : penjelasan3,
-        'jurusan4' : prodi4,
-        'penjelasan4' : penjelasan4,
 
+def hapus_Dosen(request, id_Dosen):
+    dosen = Dosen.objects.filter(id=id_Dosen)
+    dosen.delete()
+
+    messages.success(request, "Data berhasil dihapus")
+
+    return redirect('Dosen')
+
+def ubah_Dosen(request, id_Dosen):
+    dosen = Dosen.objects.get(id=id_Dosen)
+    template = 'ubah-dosen.html'
+    if request.POST:
+        form = FormDosen(request.POST, instance=dosen)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Data berhasil diperbaharui")
+            return redirect('ubah_Dosen', id_Dosen=id_Dosen)
+    else:
+        form = FormDosen(instance=dosen)
+        konteks = {
+            'form':form,
+            'dosen':dosen,
+        }    
+
+    return render(request, template, konteks)
+
+def indexfaperta(request):
+    books = Dosen.objects.all()
+    tendiks = Tendik.objects.all()
+    students = Mahasiswa.objects.all()
+    konteks = {
+        'books' : books,
+        'tendiks' : tendiks,
+        'students' : students,
     }
-    
     return render(request, 'faperta.html', konteks)
+
+def tambah_Dosen(request):
+    if request.POST:
+        form = FormDosen(request.POST)
+        if form.is_valid():
+            form.save()
+            form = FormDosen()
+            pesan = "Data berhasil disimpan"
+
+            konteks = {
+                'form' : form,
+                'pesan' : pesan
+            }
+
+            return render (request, 'tambah-dosen.html', konteks)
+    else: 
+        form = FormDosen()
+
+    konteks = {
+        'form': form,
+    }
+
+    return render(request, 'tambah-dosen.html', konteks)
+
+def tambah_Tendik(request):
+    if request.POST:
+        form = FormTendik(request.POST)
+        if form.is_valid():
+            form.save()
+            form = FormTendik()
+            pesan = "Data berhasil disimpan"
+
+            konteks = {
+                'form' : form,
+                'pesan' : pesan,
+            }
+
+            return render (request, 'tambah-tendik.html', konteks)
+    else: 
+        form = FormTendik()
+
+    konteks = {
+        'form': form
+    }
+
+    return render(request, 'tambah-tendik.html', konteks)
+
+def tambah_Mahasiswa(request):
+    if request.POST:
+        form = FormMahasiswa(request.POST)
+        if form.is_valid():
+            form.save()
+            form = FormMahasiswa()
+            pesan = "Data berhasil disimpan"
+
+            konteks = {
+                'form' : form,
+                'pesan' : pesan,
+            }
+
+            return render (request, 'tambah-mahasiswa.html', konteks)
+    else: 
+        form = FormMahasiswa()
+
+    konteks = {
+        'form': form
+    }
+
+    return render(request, 'tambah-mahasiswa.html', konteks)

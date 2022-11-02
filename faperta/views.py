@@ -13,6 +13,22 @@ def hapus_Dosen(request, id_Dosen):
 
     return redirect('Dosen')
 
+def hapus_Tendik(request, id_Tendik):
+    tendik = Tendik.objects.filter(id=id_Tendik)
+    tendik.delete()
+
+    messages.success(request, "Data berhasil dihapus")
+
+    return redirect('Tendik')
+
+def hapus_Mahasiswa(request, id_Mahasiswa):
+    mahasiswa = Mahasiswa.objects.filter(id=id_Mahasiswa)
+    mahasiswa.delete()
+
+    messages.success(request, "Data berhasil dihapus")
+
+    return redirect('Mahasiswa')
+
 def ubah_Dosen(request, id_Dosen):
     dosen = Dosen.objects.get(id=id_Dosen)
     template = 'ubah-dosen.html'
@@ -27,6 +43,42 @@ def ubah_Dosen(request, id_Dosen):
         konteks = {
             'form':form,
             'dosen':dosen,
+        }    
+
+    return render(request, template, konteks)
+
+def ubah_Tendik(request, id_Tendik):
+    tendik = Tendik.objects.get(id=id_Tendik)
+    template = 'ubah-tendik.html'
+    if request.POST:
+        form = FormTendik(request.POST, instance=tendik)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Data berhasil diperbaharui")
+            return redirect('ubah_tendik', id_Tendik=id_Tendik)
+    else:
+        form = FormTendik(instance=tendik)
+        konteks = {
+            'form':form,
+            'tendik':tendik,
+        }    
+
+    return render(request, template, konteks)
+
+def ubah_Mahasiswa(request, id_Mahasiswa):
+    mahasiswa = Mahasiswa.objects.get(id=id_Mahasiswa)
+    template = 'ubah-mahasiswa.html'
+    if request.POST:
+        form = FormMahasiswa(request.POST, instance=mahasiswa)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Data berhasil diperbaharui")
+            return redirect('ubah_mahasiswa', id_Mahasiswa=id_Mahasiswa)
+    else:
+        form = FormMahasiswa(instance=mahasiswa)
+        konteks = {
+            'form':form,
+            'mahasiswa':mahasiswa,
         }    
 
     return render(request, template, konteks)

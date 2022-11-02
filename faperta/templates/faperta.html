@@ -3,6 +3,7 @@
 {% load static %}
 
 {% block content %}
+<br>
 
     <center>
     <h1>Fakultas Pertanian</h1>
@@ -24,7 +25,7 @@
     <hr>
     <hr>
     <h3>
-        DATA DOSEN
+        DATA DOSEN FAPERTA
         <a href="{% url 'tambah_Dosen' %}">Tambah</a>
     </h3>
     {% for message in messages %}
@@ -93,8 +94,148 @@
     </div>
 </div>
 <br>
-    
 <hr>
+<h3>
+    DATA TENDIK FAPERTA
+    <a href="{% url 'tambah_Tendik' %}">Tambah</a>
+</h3>
+{% for message in messages %}
+            {% if message %} 
+            <div class="alert alert-success">{{ message }}</div>
+            {% endif %}
+        {% endfor %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>NIP</th>
+                    <th>NAMA</th>
+                    <th>TANGGAL LAHIR</th>
+                    <th>FOTO</th>
+                    <th>EMAIL</th>
+                    <th>UNIT</th>
+                    <th>ALAMAT</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for Tendik in books %}
+            <tr>
+                <td><a href="{% url 'ubah_Tendik' Tendik.id %}">{{ Tendik.NIP }}</a></td>
+                <td>{{ Tendik.Nama }}</td>
+                <td>{{ Tendik.TanggalLahir }}</td>
+                <td>{{ Tendik.Foto }}</td>
+                <td>{{ Tendik.Email }}</td>
+                <td>{{ Tendik.Unit }}</td>
+                <td>{{ Tendik.Alamat }}</td>
+                <td>
+                    <button data-toggle="modal" data-target="#hapus-{{ Tendik.id }}" class="btn btn-danger">Hapus</button>
+                </td>
+
+                <div class="modal" id="hapus-{{ Tendik.id }}">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="modal-title">
+                                   <h3>Hapus</h3>
+                                </div>
+                            </div>
+                        <div class="modal-body">
+                            Apakah Anda yakin ingin menghapus<strong>{{ Tendik.Nama | upper }}</strong>?
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{% url 'hapus_Tendik' Tendik.id %}" class="btn btn-danger">Hapus</a>
+                            <button class="btn btn-dark" data-dismiss="modal">Tidak</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+<br>
+<hr>
+<h3>
+    DATA MAHASISWA FAPERTA
+    <a href="{% url 'tambah_Mahasiswa' %}">Tambah</a>
+</h3>
+{% for message in messages %}
+            {% if message %} 
+            <div class="alert alert-success">{{ message }}</div>
+            {% endif %}
+        {% endfor %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>NIP</th>
+                    <th>NAMA</th>
+                    <th>TANGGAL LAHIR</th>
+                    <th>FOTO</th>
+                    <th>EMAIL</th>
+                    <th>FAKULTAS</th>
+                    <th>PRODI</th>
+                    <th>ALAMAT</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for Mahasiswa in books %}
+            <tr>
+                <td><a href="{% url 'ubah_Mahasiswa' Mahasiswa.id %}">{{ Mahasiswa.NIP }}</a></td>
+                <td>{{ Mahasiswa.Nama }}</td>
+                <td>{{ Mahasiswa.TanggalLahir }}</td>
+                <td>{{ Mahasiswa.Foto }}</td>
+                <td>{{ Mahasiswa.Email }}</td>
+                <td>{{ Mahasiswa.Fakultas }}</td>
+                <td>{{ Mahasiswa.Prodi }}</td>
+                <td>{{ Mahasiswa.Alamat }}</td>
+                <td>
+                    <button data-toggle="modal" data-target="#hapus-{{ Mahasiswa.id }}" class="btn btn-danger">Hapus</button>
+                </td>
+
+                <div class="modal" id="hapus-{{ Mahasiswa.id }}">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="modal-title">
+                                   <h3>Hapus</h3>
+                                </div>
+                            </div>
+                        <div class="modal-body">
+                            Apakah Anda yakin ingin menghapus<strong>{{ Mahasiswa.Nama | upper }}</strong>?
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{% url 'hapus_Mahasiswa' Mahasiswa.id %}" class="btn btn-danger">Hapus</a>
+                            <button class="btn btn-dark" data-dismiss="modal">Tidak</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+<br>
+<hr>
+
     <hr>
     <br>
     <style>

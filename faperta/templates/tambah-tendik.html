@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
 
-{% load static %}
-
 {% block content %}
 
 <div class="container">
@@ -13,10 +11,12 @@
             <form action="/tambah-tendik/" method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
-            <button class="btn btn-primary">Tambah Tendik</button>
-        </form>
+                <button class="btn btn-primary">Tambah</button>
+            
+            </form>
+        </div>
     </div>
 </div>
-</div>
+
 
 {% endblock %}

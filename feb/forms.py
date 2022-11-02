@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django import forms
-from fkip.models import Dosen, Tendik, Mahasiswa
+from feb.models import Dosen, Tendik, Mahasiswa
 
 class FormDosen(ModelForm):
     class Meta:

@@ -13,7 +13,217 @@
     <p style="text-align: justify;">Pada tanggal 1 Februari 2006 telah dikeluarkan SK No. 295/D/T/2006 tentang Perpanjangan izin penyelenggaraan Program studi  Ilmu Administrasi Negara dan Ilmu Komunikasi selama 4 tahun.</p>
     <p style="text-align: justify;">FISIP Untirta terus berpacu dan berkembang untuk berusaha mensejajarkan diri dengan fakultas yang lebih dulu berdiri dengan mengeluarkan jurus-jurus strategis baik dibidang pendidikan, pengajaran, pengabdian masyarakat, sarana dan prasarana sebagai wujud dari Tri Dharma Perguruan Tinggi. Hal ini dibuktikan dengan diselenggarakan berbagai kegiatan dan beberapa sarana untuk meningkatkan kualitas baik dosen, mahasiswa maupun karyawan.</p>
     <hr>
+    <h3>
+        DATA DOSEN FISIP
+        <a href="{% url 'tambah_Dosen' %}">Tambah</a>
+    </h3>
+    {% for message in messages %}
+                {% if message %} 
+                <div class="alert alert-success">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>NIP</th>
+                        <th>NAMA</th>
+                        <th>TANGGAL LAHIR</th>
+                        <th>FOTO</th>
+                        <th>EMAIL</th>
+                        <th>FAKULTAS</th>
+                        <th>PRODI</th>
+                        <th>ALAMAT</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for Dosen in books %}
+                <tr>
+                    <td><a href="{% url 'ubah_Dosen' Dosen.id %}">{{ Dosen.NIP }}</a></td>
+                    <td>{{ Dosen.Nama }}</td>
+                    <td>{{ Dosen.TanggalLahir }}</td>
+                    <td>{{ Dosen.Foto }}</td>
+                    <td>{{ Dosen.Email }}</td>
+                    <td>{{ Dosen.Fakultas }}</td>
+                    <td>{{ Dosen.Prodi }}</td>
+                    <td>{{ Dosen.Alamat }}</td>
+                    <td>
+                        <button data-toggle="modal" data-target="#hapus-{{ Dosen.id }}" class="btn btn-danger">Hapus</button>
+                    </td>
     
+                    <div class="modal" id="hapus-{{ Dosen.id }}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div class="modal-title">
+                                       <h3>Hapus</h3>
+                                    </div>
+                                </div>
+                            <div class="modal-body">
+                                Apakah Anda yakin ingin menghapus<strong>{{ Dosen.Nama | upper }}</strong>?
+                            </div>
+                            <div class="modal-footer">
+                                <a href="{% url 'hapus_Dosen' Dosen.id %}" class="btn btn-danger">Hapus</a>
+                                <button class="btn btn-dark" data-dismiss="modal">Tidak</button>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+                            {% endfor %}
+    
+                        </tbody>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<hr>
+<h3>
+    DATA TENDIK FISIP
+    <a href="{% url 'tambah_Tendik' %}">Tambah</a>
+</h3>
+{% for message in messages %}
+            {% if message %} 
+            <div class="alert alert-success">{{ message }}</div>
+            {% endif %}
+        {% endfor %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>NIP</th>
+                    <th>NAMA</th>
+                    <th>TANGGAL LAHIR</th>
+                    <th>FOTO</th>
+                    <th>EMAIL</th>
+                    <th>UNIT</th>
+                    <th>ALAMAT</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for Tendik in books %}
+            <tr>
+                <td><a href="{% url 'ubah_Tendik' Tendik.id %}">{{ Tendik.NIP }}</a></td>
+                <td>{{ Tendik.Nama }}</td>
+                <td>{{ Tendik.TanggalLahir }}</td>
+                <td>{{ Tendik.Foto }}</td>
+                <td>{{ Tendik.Email }}</td>
+                <td>{{ Tendik.Unit }}</td>
+                <td>{{ Tendik.Alamat }}</td>
+                <td>
+                    <button data-toggle="modal" data-target="#hapus-{{ Tendik.id }}" class="btn btn-danger">Hapus</button>
+                </td>
+
+                <div class="modal" id="hapus-{{ Tendik.id }}">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="modal-title">
+                                   <h3>Hapus</h3>
+                                </div>
+                            </div>
+                        <div class="modal-body">
+                            Apakah Anda yakin ingin menghapus<strong>{{ Tendik.Nama | upper }}</strong>?
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{% url 'hapus_Tendik' Tendik.id %}" class="btn btn-danger">Hapus</a>
+                            <button class="btn btn-dark" data-dismiss="modal">Tidak</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+<br>
+<hr>
+<h3>
+    DATA MAHASISWA FISIP
+    <a href="{% url 'tambah_Mahasiswa' %}">Tambah</a>
+</h3>
+{% for message in messages %}
+            {% if message %} 
+            <div class="alert alert-success">{{ message }}</div>
+            {% endif %}
+        {% endfor %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>NIM</th>
+                    <th>NAMA</th>
+                    <th>TANGGAL LAHIR</th>
+                    <th>FOTO</th>
+                    <th>EMAIL</th>
+                    <th>FAKULTAS</th>
+                    <th>PRODI</th>
+                    <th>ALAMAT</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for Mahasiswa in books %}
+            <tr>
+                <td><a href="{% url 'ubah_Mahasiswa' Mahasiswa.id %}">{{ Mahasiswa.NIP }}</a></td>
+                <td>{{ Mahasiswa.Nama }}</td>
+                <td>{{ Mahasiswa.TanggalLahir }}</td>
+                <td>{{ Mahasiswa.Foto }}</td>
+                <td>{{ Mahasiswa.Email }}</td>
+                <td>{{ Mahasiswa.Fakultas }}</td>
+                <td>{{ Mahasiswa.Prodi }}</td>
+                <td>{{ Mahasiswa.Alamat }}</td>
+                <td>
+                    <button data-toggle="modal" data-target="#hapus-{{ Mahasiswa.id }}" class="btn btn-danger">Hapus</button>
+                </td>
+
+                <div class="modal" id="hapus-{{ Mahasiswa.id }}">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="modal-title">
+                                   <h3>Hapus</h3>
+                                </div>
+                            </div>
+                        <div class="modal-body">
+                            Apakah Anda yakin ingin menghapus<strong>{{ Mahasiswa.Nama | upper }}</strong>?
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{% url 'hapus_Mahasiswa' Mahasiswa.id %}" class="btn btn-danger">Hapus</a>
+                            <button class="btn btn-dark" data-dismiss="modal">Tidak</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+<br>
+<hr>
     <hr>
     <br>
     <style>
@@ -29,79 +239,4 @@
     </b>
     <br>
     <hr>
-
-    <h2>Daftar Nama Dosen FISIP</h2>
-    <table class="table table-success table-striped">
-        <tr>
-            <th>NIP</th>
-            <th>Nama</th>
-            <th>Tanggal Lahir</th>
-            <th>Foto</th>
-            <th>Email</th>
-            <th>Fakultas</th>
-            <th>Prodi</th>
-            <th>Alamat</th>
-        </tr>
-        {% for dosen in dataDosen %}
-        <tr>
-            <td>{{ Dosen.NIP }}</td>
-            <td>{{ Dosen.Nama }}</td>
-            <td>{{ Dosen.TanggalLahir }}</td>
-            <td>{{ Dosen.Foto }}</td>
-            <td>{{ Dosen.Email }}</td>
-            <td>{{ Dosen.Fakultas }}</td>
-            <td>{{ Dosen.Prodi }}</td>
-            <td>{{ Dosen.Alamat }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    <br>
-    <h2>Daftar Nama Staf FISIP</h2>
-    <table class="table table-success table-striped">
-        <tr>
-            <th>NIP</th>
-            <th>Nama</th>
-            <th>Tanggal Lahir</th>
-            <th>Foto</th>
-            <th>Email</th>
-            <th>Unit</th>
-            <th>Alamat</th>
-        </tr>
-        {% for tendik in dataTendik %}
-        <tr>
-            <td>{{ Tendik.NIP }}</td>
-            <td>{{ Tendik.Nama }}</td>
-            <td>{{ Tendik.TanggalLahir }}</td>
-            <td>{{ Tendik.Foto }}</td>
-            <td>{{ Tendik.Email }}</td>
-            <td>{{ Tendik.Unit }}</td>
-            <td>{{ Tendik.Alamat }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    <br>
-    <h2>Daftar Nama Mahasiswa FISIP</h2>
-    <table class="table table-success table-striped">
-        <tr>
-            <th>NIM</th>
-            <th>Nama</th>
-            <th>Tanggal Lahir</th>
-            <th>Foto</th>
-            <th>Email</th>
-            <th>Fakultas</th>
-            <th>Prodi</th>
-            <th>Alamat</th>
-        </tr>
-        {% for mahasiswa in dataMahasiswa %}
-        <tr>
-            <td>{{ Mahasiswa.NIM }}</td>
-            <td>{{ Mahasiswa.Nama }}</td>
-            <td>{{ Mahasiswa.TanggalLahir }}</td>
-            <td>{{ Mahasiswa.Foto }}</td>
-            <td>{{ Mahasiswa.Email }}</td>
-            <td>{{ Mahasiswa.Fakultas }}</td>
-            <td>{{ Mahasiswa.Prodi }}</td>
-        </tr>
-        {% endfor %}
-    </table>
 {% endblock %}
